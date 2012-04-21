@@ -1,3 +1,5 @@
+python harness.py -d src -r results/results.all python src/search.py reviews/reviews.all
+
 Code Golf Submission Repo
 =========================
 
