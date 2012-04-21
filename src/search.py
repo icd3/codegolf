@@ -1,54 +1,26 @@
 import sys
 import json
-import codecs
-
-reviews = {}
-
-def index(file):
-  f = codecs.open(file, 'r', 'utf-8')
-  for line in f:
-    line = line.strip()
-    if line:
-      line = line.partition(':')
-      reviews[clean(line[2])] = line[0].strip()
-  f.close()
-
-def query(input):
-  results = []
-  for key in reviews.keys():
-    for term in input:
-      if not term in key: break
-    else:
-      results.append(reviews[key])
-  return results
-
-def clean(text):
-  return (
-    text
-    .lower()
-    .replace('/', '')
-    .replace('(', '')
-    .replace(')', '')
-    .replace(':', '')
-    .replace('.', '')
-    .replace(',', '')
-    .replace(';', '')
-    .replace(';', '')
-    .replace('?', ' ?')
-    .replace('!', ' !')
-    .replace('-', ' - '))
-
-
-index( sys.argv[1])
-sys.stdout.flush()
-while True:
-  sys.stdout.write('> '); sys.stdout.flush()
-  try: inpt = sys.stdin.readline()
-  except: break;
-  if not inpt: continue
-  inpt = clean(inpt)
-  inpt = inpt.split()
-  sys.stdout.write( json.dumps( query(inpt)))
-  sys.stdout.flush()
-  
-sys.stdout.flush()
+import re
+r={}
+t=sys.stdout
+def p(s,c,d): return s.replace(c,d)
+def x(f):
+ for l in f:
+  l=l.strip().partition(':')
+  if l[2]:r[c(l[2])]=l[0].strip()
+def c(t):return p(p(p(p(p(p(p(p(p(p(t.lower(),'/',''),'(',''),')',''),':',''),'.',''),',',''),';',''),'?',' ?'),'!',' !'),'-',' - ')
+x(open(sys.argv[1],'r'))
+t.flush()
+while 1:
+ t.write('> '); t.flush()
+ try:i=sys.stdin.readline()
+ except:break;
+ if i:
+  i=c(i).split()
+  s=[]
+  for k in r.keys():
+   for u in i:
+    if not u in k:break
+   else:s.append(r[k])
+  t.write(json.dumps(s))
+  t.flush()
