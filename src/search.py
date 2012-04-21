@@ -3,12 +3,11 @@ import json
 import re
 r={}
 t=sys.stdout
-def p(s,c,d): return s.replace(c,d)
 def x(f):
  for l in f:
   l=l.strip().partition(':')
   if l[2]:r[c(l[2])]=l[0].strip()
-def c(t):return p(p(p(p(p(p(p(p(p(p(t.lower(),'/',''),'(',''),')',''),':',''),'.',''),',',''),';',''),'?',' ?'),'!',' !'),'-',' - ')
+def c(t):return re.sub(r'([\?!-])',' \1',re.sub(r'([/\(\):\.,;])','',t)).lower()
 x(open(sys.argv[1],'r'))
 t.flush()
 while 1:
